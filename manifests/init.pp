@@ -1,21 +1,25 @@
 class fail2ban (
-  $ignoreip   = ['127.0.0.1/8'],
-  $bantime    = 600,
-  $maxretry   = 3,
-  $backend    = 'auto',
-  $destemail  = 'root@localhost',
-  $banaction  = 'iptables-multiport',
-  $mta        = 'sendmail',
-  $protocol   = 'tcp',
-  $chain      = 'INPUT',
-  $action_    = '%(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]',
-  $action_mw  = '%(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+  $ignoreip       = ['127.0.0.1/8'],
+  $bantime        = 600,
+  $maxretry       = 3,
+  $backend        = 'auto',
+  $destemail      = 'root@localhost',
+  $banaction      = 'iptables-multiport',
+  $mta            = 'sendmail',
+  $protocol       = 'tcp',
+  $chain          = 'INPUT',
+  $action_        = '%(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]',
+  $action_mw      = '%(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
             %(mta)s-whois[name=%(__name__)s, dest="%(destemail)s", protocol="%(protocol)s", chain="%(chain)s"]',
-  $action_mwl = '%(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+  $action_mwl     = '%(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
               %(mta)s-whois-lines[name=%(__name__)s, dest="%(destemail)s", logpath=%(logpath)s, chain="%(chain)s"]',
-  $action     = '%(action_mwl)s',
-  $motd       = true,
+  $action         = '%(action_mwl)s',
+  $motd           = true,
+  $latest_filters = true,
 ) {
+
+  validate_bool($motd)
+  validate_bool($latest_filters)
 
   if($motd)
   {

@@ -15,6 +15,15 @@ class fail2ban::config () {
     source => 'puppet:///modules/fail2ban/apache-w00tw00t.conf'
   }
 
+  if $fail2ban::latest_filters
+  {
+    file { '/etc/fail2ban/filter.d':
+      source  => 'puppet:///modules/fail2ban/latest',
+      recurse => true,
+    }
+  }
+
+
   concat { $fail2ban::params::fail2ban_section_config:
     owner => 'root',
     group => 'root',

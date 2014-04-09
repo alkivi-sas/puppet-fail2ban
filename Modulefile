@@ -1,5 +1,5 @@
 name    'alkivi-fail2ban'
-version '0.0.2'
+version '0.0.3'
 source 'https://github.com/alkivi-sas/puppet-fail2ban'
 author 'alkivi'
 license 'LGPLv3'
