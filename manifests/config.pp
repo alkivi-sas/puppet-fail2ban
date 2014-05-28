@@ -15,6 +15,26 @@ class fail2ban::config () {
     source => 'puppet:///modules/fail2ban/apache-w00tw00t.conf'
   }
 
+  file { '/etc/fail2ban/filter.d/nginx-proxy.conf':
+    source => 'puppet:///modules/fail2ban/nginx-proxy.conf',
+  }
+
+  file { '/etc/fail2ban/filter.d/nginx-auth.conf':
+    source => 'puppet:///modules/fail2ban/nginx-auth.conf',
+  }
+
+  file { '/etc/fail2ban/filter.d/nginx-nohome.conf':
+    source => 'puppet:///modules/fail2ban/nginx-nohome.conf',
+  }
+
+  file { '/etc/fail2ban/filter.d/nginx-noscript.conf':
+    source => 'puppet:///modules/fail2ban/nginx-noscript.conf',
+  }
+
+  file { '/etc/fail2ban/filter.d/nginx-login.conf':
+    source => 'puppet:///modules/fail2ban/nginx-login.conf',
+  }
+
   if $fail2ban::latest_filters
   {
     file { '/etc/fail2ban/filter.d':
@@ -22,7 +42,6 @@ class fail2ban::config () {
       recurse => true,
     }
   }
-
 
   concat { $fail2ban::params::fail2ban_section_config:
     owner => 'root',
