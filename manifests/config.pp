@@ -1,4 +1,18 @@
-class fail2ban::config () {
+class fail2ban::config (
+  $ignoreip   = $fail2ban::ignoreip,
+  $bantime    = $fail2ban::bantime,
+  $maxretry   = $fail2ban::maxretry,
+  $backend    = $fail2ban::backend,
+  $destemail  = $fail2ban::destemail,
+  $banaction  = $fail2ban::banaction,
+  $mta        = $fail2ban::mta,
+  $protocol   = $fail2ban::protocol,
+  $chain      = $fail2ban::chain,
+  $action_    = $fail2ban::action_,
+  $action_mw  = $fail2ban::action_mw,
+  $action_mwl = $fail2ban::action_mwl,
+  $action     = $fail2ban::action,
+) {
   File {
     ensure => present,
     owner  => 'root',
